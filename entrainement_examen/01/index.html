@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ma Liste de Films</title>
+    <style>
+      .movie-container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 15px;
+        background-color: #f8f9fa;
+      }
+
+      .form-film {
+        display: flex;
+        gap: 15px;
+        padding: 20px;
+        background-color: #e9ecef;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+
+      .input-zone {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .input-zone input,
+      .input-zone select {
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+      }
+
+      #btnAjoutFilm {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        align-self: flex-end;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #dee2e6;
+      }
+
+      th {
+        background-color: #007bff;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="movie-container">
+      <form class="form-film">
+        <div class="input-zone">
+          <label for="titreFilm">Titre</label>
+          <input type="text" id="titreFilm" />
+        </div>
+        <div class="input-zone">
+          <label for="realisateur">Réalisateur</label>
+          <input type="text" id="realisateur" />
+        </div>
+        <div class="input-zone">
+          <label for="annee">Année</label>
+          <input type="number" id="annee" min="1900" />
+        </div>
+        <div class="input-zone">
+          <label for="genre">Genre</label>
+          <select id="genre">
+            <option value="Action">Action</option>
+            <option value="Comédie">Comédie</option>
+            <option value="Drame">Drame</option>
+          </select>
+        </div>
+        <button type="button" id="btnAjoutFilm">Ajouter</button>
+      </form>
+
+      <table id="tableFilms">
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Réalisateur</th>
+            <th>Année</th>
+            <th>Genre</th>
+          </tr>
+        </thead>
+        <tbody id="corpsTableFilms"></tbody>
+      </table>
+    </div>
+
+    <script>
+      var inputTitre = document.getElementById("titreFilm");
+      var inputRealisateur = document.getElementById("realisateur");
+      var inputAnnee = document.getElementById("annee");
+      var selectGenre = document.getElementById("genre");
+      var btnAjout = document.getElementById("btnAjoutFilm");
+      var corpTable = document.getElementById("corpsTableFilms");
+
+      function ajouterFilm() {
+        var ligne = document.createElement("tr");
+
+        var cellTitre = document.createElement("td");
+        var cellRealisateur = document.createElement("td");
+        var cellAnnee = document.createElement("td");
+        var cellGenre = document.createElement("td");
+
+        cellTitre.textContent = inputTitre.value;
+        cellRealisateur.textContent = inputRealisateur.value;
+        cellAnnee.textContent = inputAnnee.value;
+        cellGenre.textContent = selectGenre.value;
+
+        ligne.appendChild(cellTitre);
+        ligne.appendChild(cellRealisateur);
+        ligne.appendChild(cellAnnee);
+        ligne.appendChild(cellGenre);
+
+        corpTable.appendChild(ligne);
+
+        inputTitre.value = "";
+        inputRealisateur.value = "";
+        inputAnnee.value = "";
+        selectGenre.selectedIndex = 0;
+      }
+
+      btnAjout.onclick = ajouterFilm;
+    </script>
+  </body>
+</html>

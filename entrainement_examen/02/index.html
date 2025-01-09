@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestionnaire de Tâches</title>
+    <style>
+      .task-manager {
+        max-width: 800px;
+        margin: 20px auto;
+        font-family: Arial, sans-serif;
+      }
+
+      .task-form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        background-color: #edf2f7;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+
+      .form-group {
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #4a5568;
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #cbd5e0;
+        border-radius: 4px;
+      }
+
+      #btnAjoutTache {
+        background-color: #48bb78;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+
+      #tableTaches {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      #tableTaches th {
+        background-color: #48bb78;
+        color: white;
+        padding: 12px;
+        text-align: left;
+      }
+
+      #tableTaches td {
+        padding: 12px;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      .priorite-haute {
+        color: #e53e3e;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="task-manager">
+      <div class="task-form">
+        <div class="form-group">
+          <label for="nomTache">Nom de la tâche</label>
+          <input type="text" id="nomTache" />
+        </div>
+        <div class="form-group">
+          <label for="responsable">Responsable</label>
+          <input type="text" id="responsable" />
+        </div>
+        <div class="form-group">
+          <label for="priorite">Priorité</label>
+          <select id="priorite">
+            <option value="Basse">Basse</option>
+            <option value="Moyenne">Moyenne</option>
+            <option value="Haute">Haute</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="dateLimite">Date limite</label>
+          <input type="date" id="dateLimite" />
+        </div>
+        <button type="button" id="btnAjoutTache">Ajouter la tâche</button>
+      </div>
+
+      <table id="tableTaches">
+        <thead>
+          <tr>
+            <th>Tâche</th>
+            <th>Responsable</th>
+            <th>Priorité</th>
+            <th>Date limite</th>
+          </tr>
+        </thead>
+        <tbody id="corpsTableTaches"></tbody>
+      </table>
+    </div>
+
+    <script>
+      var inputNom = document.getElementById("nomTache");
+      var inputResponsable = document.getElementById("responsable");
+      var selectPriorite = document.getElementById("priorite");
+      var inputDate = document.getElementById("dateLimite");
+      var btnAjout = document.getElementById("btnAjoutTache");
+      var corpsTable = document.getElementById("corpsTableTaches");
+
+      function ajouterTache() {
+        var nouvelleLigne = document.createElement("tr");
+
+        var cellNom = document.createElement("td");
+        var cellResponsable = document.createElement("td");
+        var cellPriorite = document.createElement("td");
+        var cellDate = document.createElement("td");
+
+        cellNom.textContent = inputNom.value;
+        cellResponsable.textContent = inputResponsable.value;
+        cellPriorite.textContent = selectPriorite.value;
+        cellDate.textContent = inputDate.value;
+
+        if (selectPriorite.value === "Haute") {
+          cellPriorite.classList.add("priorite-haute");
+        }
+
+        nouvelleLigne.appendChild(cellNom);
+        nouvelleLigne.appendChild(cellResponsable);
+        nouvelleLigne.appendChild(cellPriorite);
+        nouvelleLigne.appendChild(cellDate);
+
+        corpsTable.appendChild(nouvelleLigne);
+
+        inputNom.value = "";
+        inputResponsable.value = "";
+        selectPriorite.selectedIndex = 0;
+        inputDate.value = "";
+      }
+
+      btnAjout.onclick = ajouterTache;
+    </script>
+  </body>
+</html>

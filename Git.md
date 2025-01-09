@@ -29,3 +29,15 @@ ensuite on sauvegarde les fichiers avec la commande :
 ```sh
 git commit -m "Message de sauvegarde"
 ```
+
+Pour envoyer les fichiers sur un serveur distant Github, on utilise la commande :
+
+```sh
+git remote add origin https://<monpseudo>:<token>@github.com/bendahmanem/ISITECH-2425-B1-HTML.git
+```
+
+puis
+
+```sh
+git push -u origin main
+```
